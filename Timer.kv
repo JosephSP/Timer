@@ -1,0 +1,98 @@
+MainWidget:
+
+<MainWidget>:
+    orientation: "vertical"
+    Label:
+        size_hint: 1, .15
+        text: "Joseph Timer"
+        font_size: 30
+    BoxLayout:
+        size_hint: 1, .15
+        orientation: "horizontal"
+        Label:
+            font_size: 20
+            text: "La hora actual es: " + root.actual_time_str
+       
+    Cronometro_Container:
+    Temporizador_Container:
+
+
+<Cronometro_Container>
+    size_hint: 1, .4
+    orientation: "horizontal"
+    BoxLayout:
+        Label:
+            size_hint: .5, 1
+            text: "Cronometro"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: 1, .15
+            text: "Tiempo Cronometrado"
+        Label:
+            size_hint: 1, .15
+            text: root.parent.cronometro_time_str
+    BoxLayout:
+        orientation: "vertical"
+        ToggleButton:
+            size_hint: 1, .1
+            # size_hint: .2 , 1
+            text: "Start/Stop"
+            on_state: root.parent.cronometro_start_stop(self)
+        Button:
+            size_hint: 1, .1
+            # size_hint: .2 , 1
+            text: "Reset"
+            on_press: root.parent.reset_cronometro()
+
+
+<Temporizador_Container>
+    orientation: "horizontal"
+    BoxLayout:
+        Label:
+            text: "Temporizador"
+            size_hint: .5, 1
+    BoxLayout:
+        orientation: "vertical"
+        GridLayout:
+            size_hint: 1, .15
+            rows: 2
+            cols: 3
+            Label:
+                text: "horas"
+            Label:
+                text: "minutos"
+            Label:
+                text: "segundos"
+            TextInput:
+                id: Entered_hr
+                text: "00"
+                multiline: False
+                halign: "center"
+            TextInput:
+                id: Entered_min
+                text: "15"
+                multiline: False
+                halign: "center"
+            TextInput:
+                id: Entered_sec
+                text: "00"
+                multiline: False
+                halign: "center"
+        Label:
+            size_hint: 1, .1
+            text: "Tiempo Restante"
+        Label:
+            size_hint: 1, .15
+            text: root.parent.temporizador_time_str
+    BoxLayout:
+        # size_hint: 1, .4
+        orientation: "vertical"
+        ToggleButton:
+            # size_hint: .3, .1
+            text: "Start/Stop"
+            on_state: root.parent.temporizador_start_stop(self, Entered_hr.text, Entered_min.text, Entered_sec.text)
+        Button:
+            # size_hint: .3, .1
+            text: "Reset"
+            on_press: root.parent.reset_temporizador(Entered_hr.text, Entered_min.text, Entered_sec.text)
